@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "5545D71F-9A0E-4252-B959-1F38A8004C95",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:CatFact.xcodeproj",
+      "identifier" : "0B5EFD212A7F996A00BE27FF",
+      "name" : "CatFact"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:CatFact.xcodeproj",
+        "identifier" : "0B5EFD322A7F996C00BE27FF",
+        "name" : "CatFactTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:CatFactLibrary",
+        "identifier" : "CatFactLibraryTests",
+        "name" : "CatFactLibraryTests"
+      }
+    }
+  ],
+  "version" : 1
+}
