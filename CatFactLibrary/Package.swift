@@ -29,7 +29,7 @@ let package = Package(
 				"Swinject",
 				"CatLogger",
 			],
-			resources: [.process("Resources/Config.plist")]
+			resources: [.process("CatFact/Resources/Config.plist")]
 		),
 		.testTarget(
 			name: "CatFactLibraryTests",
