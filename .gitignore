@@ -1,0 +1,11 @@
+xcuserdata/
+DerivedData/
+fastlane/README.md
+fastlane/report.xml
+build/
+output/
+profiles/
+Certificates.p12
+.bundle
+vendor/
+.DS_Store
