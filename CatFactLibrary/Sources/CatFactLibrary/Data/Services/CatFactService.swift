@@ -11,6 +11,7 @@ import CatLogger
 
 protocol CreateCatFactServiceProtocol {
 
+	@discardableResult
 	func getRandomCatFact() async throws -> CatFact 
 }
 

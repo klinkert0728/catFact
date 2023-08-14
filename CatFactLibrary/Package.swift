@@ -28,8 +28,7 @@ let package = Package(
 				.product(name: "GRDB", package: "GRDB.swift"),
 				"Swinject",
 				"CatLogger",
-			],
-			resources: [.process("CatFact/Resources/Config.plist")]
+			]
 		),
 		.testTarget(
 			name: "CatFactLibraryTests",

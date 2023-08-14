@@ -58,7 +58,7 @@ final class CatFactServiceTests: XCTestCase {
 	}
 
 	func test_getRandomCatFact_throwSaveError_whenSavingToDatabaseFails() async throws  {
-		let newFact = CatFact(fact: "Hello World cat fact", length: .random(in: 0...10))
+		let newFact = CatFact(fact: "Hello World cat fact", length: .random(in: 0...10), creationDate: nil)
 		let responseMock = MockRestAPI(response: [newFact], pagination: .page(at: "http://www.test.com?page=2"))
 		let testUrl = try XCTUnwrap(URL(string: "http:www.test.com"))
 		let mockDBManager = MockLocalDatabase()

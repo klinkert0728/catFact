@@ -16,7 +16,7 @@ final class FetchCatFactsUsecaseTests: XCTestCase {
 	private func generateRandomFacts(numberOfFacts: Int) -> [CatFact] {
 		var randomFacts = [CatFact]()
 		for iteration in 0..<numberOfFacts {
-			let newFact = CatFact(fact: "random \(iteration)", length: .random(in: 0...10))
+			let newFact = CatFact(fact: "random \(iteration)", length: .random(in: 0...10), creationDate: nil)
 			randomFacts.append(newFact)
 		}
 
@@ -29,7 +29,7 @@ final class FetchCatFactsUsecaseTests: XCTestCase {
 		mockCatService.responseToPublish = response
 
 		let newFactsExpectaction = self.expectation(description: "Expect newFacts")
-		let sut = FetchCatFactsUsecase(catFactService: mockCatService)
+		let sut = FetchCatFactsUsecase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
 
 		sut.catFactsPublisher(limit: 20)
 			.sink { newFacts in
@@ -47,7 +47,7 @@ final class FetchCatFactsUsecaseTests: XCTestCase {
 		let mockCatService = CatServiceMock()
 		mockCatService.error = CatFactAPIServiceError.badRequest
 
-		let sut = FetchCatFactsUsecase(catFactService: mockCatService)
+		let sut = FetchCatFactsUsecase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
 		let errorExpectation = self.expectation(description: "Expect error")
 
 		do {
@@ -65,7 +65,7 @@ final class FetchCatFactsUsecaseTests: XCTestCase {
 		let mockCatService = CatServiceMock()
 		mockCatService.error = CatFactAPIServiceError.somethingWentWrong
 
-		let sut = FetchCatFactsUsecase(catFactService: mockCatService)
+		let sut = FetchCatFactsUsecase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
 		let errorExpectation = self.expectation(description: "Expect error")
 
 		do {
@@ -80,13 +80,19 @@ final class FetchCatFactsUsecaseTests: XCTestCase {
 	}
 }
 
+private struct LocalDatabaseMock: SaveLocalDatabaseManagerProtocol {
+	func save<T>(_ objects: [T]) async throws where T : DBRecordProtocol {
+
+	}
+}
+
 private class CatServiceMock: CatFactServiceProtocol {
 
 	private let catFactsSubject = CurrentValueSubject<[CatFact], Never>([CatFact]())
 	var responseToPublish = [CatFact]()
 	var error: Error?
 
-	func catFactPublisher(offset: Int, pageSize: Int) -> AnyPublisher<[CatFactLibrary.CatFact], Never> {
+	func catFactPublisher(limit: Int) -> AnyPublisher<[CatFactLibrary.CatFact], Never> {
 		// drops first as the CurrentValueSubject will always publish the initial value fist
 		self.catFactsSubject.dropFirst().eraseToAnyPublisher()
 	}
@@ -109,5 +115,8 @@ private class CatServiceMock: CatFactServiceProtocol {
 		throw error
 	}
 
-	func getRandomCatFact() async throws {}
+	func getRandomCatFact() async throws -> CatFactLibrary.CatFact {
+		return responseToPublish.first!
+	}
+
 }
