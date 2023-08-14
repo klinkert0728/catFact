@@ -25,7 +25,7 @@ struct CatFactApp: App {
 
 					HomeView(homeViewModel: viewModel)
 			} else {
-				Text("Noo")
+				ProgressView()
 			}
 		}
 	}

@@ -37,6 +37,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 		return true
 	}
 
+	/// Configure logger with debug level.
 	private func setupLogger() {
 		CatLogger.setup { label in
 			var syslogHandler = SyslogLogHandler(label: label)
