@@ -11,7 +11,7 @@ import CatLogger
 
 public protocol FetchCatFactsUseCaseProtocol {
 
-	/// Publisher fot the CatFact entries
+	/// Publisher for the CatFact entries
 	/// - Parameter limit: limit the entries that get live updates
 	/// - Returns: publisher of CatFact entries
 	func catFactsPublisher(limit: Int) -> AnyPublisher<[CatFact], Never>
@@ -41,7 +41,7 @@ final class FetchCatFactsUseCase: FetchCatFactsUseCaseProtocol {
 			try await self.persistPage(facts: facts)
 		} catch CatFactAPIServiceError.badRequest {
 			CatLogger.catFactLibrary.catFacts.error("failed to fetch first page of facts")
-			// propagte custom error when needed
+			// propagate custom error when needed
 			throw CatFactAPIServiceError.badRequest
 		} catch CatFactAPIServiceError.somethingWentWrong {
 			CatLogger.catFactLibrary.catFacts.error("failed to fetch first page of facts")
@@ -57,7 +57,7 @@ final class FetchCatFactsUseCase: FetchCatFactsUseCaseProtocol {
 			let facts = try await self.catFactService.fetchPaginatedFacts(limit: self.pageSize)
 			try await self.persistPage(facts: facts)
 		} catch {
-			// propagte custom error when needed
+			// propagate custom error when needed
 			throw error
 		}
 	}
