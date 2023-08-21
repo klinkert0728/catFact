@@ -12,11 +12,11 @@ import CatFactLibrary
 import LoggingSyslog
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-	let fetchCatFactUsecase: FetchCatFactsUsecaseProtocol?
-	let createCatFactUsecase: CreateCatfactUsecaseProtocol?
+	let fetchCatFactUseCase: FetchCatFactsUseCaseProtocol?
+	let createCatFactUseCase: CreateCatfactUseCaseProtocol?
 
 	let frameworkConfig: FrameworkConfiguration
-	let usecaseProvider: UseCaseProvider
+	let useCaseProvider: UseCaseProvider
 
 	override init() {
 		CatFactConfiguration.setup()
@@ -24,10 +24,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 		self.frameworkConfig.setup()
 
 		FrameworkConfiguration.current = self.frameworkConfig
-		self.usecaseProvider = UseCaseProvider(frameWorkConfiguration: self.frameworkConfig)
+		self.useCaseProvider = UseCaseProvider(frameWorkConfiguration: self.frameworkConfig)
 
-		self.fetchCatFactUsecase = try? self.usecaseProvider.fetchCatFactsUseCase()
-		self.createCatFactUsecase = try? self.usecaseProvider.createCatfactUsecase()
+		self.fetchCatFactUseCase = try? self.useCaseProvider.fetchCatFactsUseCase()
+		self.createCatFactUseCase = try? self.useCaseProvider.createCatfactUseCase()
 
 	}
 

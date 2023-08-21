@@ -15,12 +15,12 @@ struct CatFactApp: App {
 	var body: some Scene {
 		WindowGroup {
 			if
-				let fetchCatFactsUsecase = self.appDelegate.fetchCatFactUsecase,
-				let createCatFactUsecase = self.appDelegate.createCatFactUsecase
+				let fetchCatFactsUseCase = self.appDelegate.fetchCatFactUseCase,
+				let createCatFactUseCase = self.appDelegate.createCatFactUseCase
 			{
 				let viewModel = HomeViewModel(
-					fetchCatListUsecase: fetchCatFactsUsecase,
-					createCatFactUsecase: createCatFactUsecase
+					fetchCatListUseCase: fetchCatFactsUseCase,
+					createCatFactUseCase: createCatFactUseCase
 				)
 
 					HomeView(homeViewModel: viewModel)

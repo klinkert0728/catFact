@@ -1,5 +1,5 @@
 //
-//  FetchCatFactsUsecaseTests.swift
+//  FetchCatFactsUseCaseTests.swift
 //  
 //
 //  Created by Daniel Klinkert on 13.08.23.
@@ -10,7 +10,7 @@ import Foundation
 import Combine
 @testable import CatFactLibrary
 
-final class FetchCatFactsUsecaseTests: XCTestCase {
+final class FetchCatFactsUseCaseTests: XCTestCase {
 	private var cancellable = Set<AnyCancellable>()
 
 	private func generateRandomFacts(numberOfFacts: Int) -> [CatFact] {
@@ -29,7 +29,7 @@ final class FetchCatFactsUsecaseTests: XCTestCase {
 		mockCatService.responseToPublish = response
 
 		let newFactsExpectaction = self.expectation(description: "Expect newFacts")
-		let sut = FetchCatFactsUsecase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
+		let sut = FetchCatFactsUseCase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
 
 		sut.catFactsPublisher(limit: 20)
 			.sink { newFacts in
@@ -47,7 +47,7 @@ final class FetchCatFactsUsecaseTests: XCTestCase {
 		let mockCatService = CatServiceMock()
 		mockCatService.error = CatFactAPIServiceError.badRequest
 
-		let sut = FetchCatFactsUsecase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
+		let sut = FetchCatFactsUseCase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
 		let errorExpectation = self.expectation(description: "Expect error")
 
 		do {
@@ -65,7 +65,7 @@ final class FetchCatFactsUsecaseTests: XCTestCase {
 		let mockCatService = CatServiceMock()
 		mockCatService.error = CatFactAPIServiceError.somethingWentWrong
 
-		let sut = FetchCatFactsUsecase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
+		let sut = FetchCatFactsUseCase(catFactService: mockCatService, localDatabase: LocalDatabaseMock())
 		let errorExpectation = self.expectation(description: "Expect error")
 
 		do {

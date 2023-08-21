@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol CreateCatfactUsecaseProtocol {
+public protocol CreateCatfactUseCaseProtocol {
 	/// Create random CatFact.
 	func createRandomCatFact() async throws
 }
 
-struct CreateCatfactUseCase: CreateCatfactUsecaseProtocol {
+struct CreateCatfactUseCase: CreateCatfactUseCaseProtocol {
 
 	private let catFactService: CreateCatFactServiceProtocol
 	private let localDatabase: SaveLocalDatabaseManagerProtocol

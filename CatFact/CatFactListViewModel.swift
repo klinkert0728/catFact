@@ -15,9 +15,9 @@ import CatLogger
 	@Published var limit = 20
 
 	private var cancellable = Set<AnyCancellable>()
-	private let fetchFactsUseCase: FetchCatFactsUsecaseProtocol
+	private let fetchFactsUseCase: FetchCatFactsUseCaseProtocol
 
-	init(fetchFactsUseCase: FetchCatFactsUsecaseProtocol) {
+	init(fetchFactsUseCase: FetchCatFactsUseCaseProtocol) {
 		self.fetchFactsUseCase = fetchFactsUseCase
 		self.configureFactsUpdate()
 	}

@@ -1,5 +1,5 @@
 //
-//  FetchCatFactsUsecase.swift
+//  FetchCatFactsUseCase.swift
 //  
 //
 //  Created by Daniel Klinkert on 06.08.23.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CatLogger
 
-public protocol FetchCatFactsUsecaseProtocol {
+public protocol FetchCatFactsUseCaseProtocol {
 
 	/// Publisher fot the CatFact entries
 	/// - Parameter limit: limit the entries that get live updates
@@ -23,7 +23,7 @@ public protocol FetchCatFactsUsecaseProtocol {
 	func fetchMoreCatFacts() async throws
 }
 
-final class FetchCatFactsUsecase: FetchCatFactsUsecaseProtocol {
+final class FetchCatFactsUseCase: FetchCatFactsUseCaseProtocol {
 
 	private var catFactService: FetchCatFactServiceProtocol
 	private let localDatabase: SaveLocalDatabaseManagerProtocol

@@ -22,28 +22,28 @@ enum HomeLoadingState: Hashable, Identifiable {
 
 @MainActor
 class HomeViewModel: ObservableObject {
-	private let fetchCatListUsecase: FetchCatFactsUsecaseProtocol
-	private let createCatFactUsecase: CreateCatfactUsecaseProtocol
+	private let fetchCatListUseCase: FetchCatFactsUseCaseProtocol
+	private let createCatFactUseCase: CreateCatfactUseCaseProtocol
 
 	let creatingErrorAlertMessage = "Creating Failed, please try again"
 	@Published var creatingFact = false
 	@Published var loadingState: HomeLoadingState?
 	@Published var error = false
 
-	init(fetchCatListUsecase: FetchCatFactsUsecaseProtocol, createCatFactUsecase: CreateCatfactUsecaseProtocol) {
-		self.fetchCatListUsecase = fetchCatListUsecase
-		self.createCatFactUsecase = createCatFactUsecase
+	init(fetchCatListUseCase: FetchCatFactsUseCaseProtocol, createCatFactUseCase: CreateCatfactUseCaseProtocol) {
+		self.fetchCatListUseCase = fetchCatListUseCase
+		self.createCatFactUseCase = createCatFactUseCase
 	}
 
 	func createCatFactListViewModel() -> CatFactListViewModel {
-		CatFactListViewModel(fetchFactsUseCase: self.fetchCatListUsecase)
+		CatFactListViewModel(fetchFactsUseCase: self.fetchCatListUseCase)
 	}
 
 	func getRandomCatFact() {
 		Task {
 			self.loadingState = .inProgress
 			do {
-				try await self.createCatFactUsecase.createRandomCatFact()
+				try await self.createCatFactUseCase.createRandomCatFact()
 				self.loadingState = .completed
 			} catch {
 				self.loadingState = .failed
