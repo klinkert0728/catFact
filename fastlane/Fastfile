@@ -1,0 +1,58 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+#update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+    before_all do
+        setup_jenkins
+    end
+  lane :testCoverage do
+    # slather(
+    #   build_directory: "DerivedData",
+    #   scheme: "CatFact",
+    #   proj: "CatFact.xcodeproj",
+    # )
+  end
+
+  lane :buildForTest do
+      scan(project: "CatFact.xcodeproj",
+        scheme: "CatFact",
+        clean: true,
+        device: "iPhone 14 Pro Max",
+        build_for_testing: true,
+        configuration: "Debug",
+        testplan: "Main",
+        derived_data_path: "DerivedData",
+        xcargs: "-skipPackagePluginValidation"
+      )
+  end
+
+  lane :runAllUnitTests do
+    buildForTest
+    scan(project: "CatFact.xcodeproj",
+      scheme: "CatFact",
+      derived_data_path: "DerivedData",
+      prelaunch_simulator: true,
+      device: "iPhone 14 Pro Max",
+      ensure_devices_found: true,
+      configuration: "Debug",
+      testplan: "Main",
+      open_report: false,
+      test_without_building: true,
+      xcargs: "-skipPackagePluginValidation"
+    )
+  end
+end

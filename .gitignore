@@ -1,7 +1,7 @@
 xcuserdata/
 DerivedData/
 fastlane/README.md
-fastlane/report.xml
+fastlane/test_output/*
 build/
 output/
 profiles/
