@@ -3,4 +3,4 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'fastlane', '~> 2.212.0'
+gem 'fastlane', '~> 2.216.0'
