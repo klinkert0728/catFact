@@ -31,7 +31,7 @@ def cancelBuild() {
 }
 
 pipeline {
-    agent iOS
+    agent {label 'iOS'}
     triggers {
         cron(CRON_SETTINGS)
     }
@@ -84,10 +84,10 @@ pipeline {
         }
     }
 
-    post {
-        // Clean after build
-        always {
-            cleanWs cleanWhenFailure: false, notFailBuild: true
-        }
-    }
+    // post {
+    //     // Clean after build
+    //     always {
+    //         cleanWs cleanWhenFailure: false, notFailBuild: true
+    //     }
+    // }
 }
