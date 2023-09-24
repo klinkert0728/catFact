@@ -31,7 +31,7 @@ def cancelBuild() {
 }
 
 pipeline {
-    agent any
+    agent iOS
     triggers {
         cron(CRON_SETTINGS)
     }
